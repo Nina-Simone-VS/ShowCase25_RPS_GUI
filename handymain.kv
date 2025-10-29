@@ -1,0 +1,277 @@
+#:kivy 2.0.0
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import Factory kivy.factory.Factory 
+#:import app kivy.app.App
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+## --- CUSTOM SCORE Widget
+# This is the dynamic widget used to display one row of the scoreboard
+<ScoreRow>:
+    # Note: This widget must have a corresponding Python class (ScoreRow(MDGridLayout))
+    cols: 3
+    padding: dp(5), 0, dp(5), 0 
+    size_hint_y: None
+    height: dp(30)
+    
+    #col1: Handy's score
+    MDLabel:
+        text: root.handy_score
+        halign: 'center'
+        valign: 'center'
+        # Accessing the theme correctly via the global app object
+        color: app.get_running_app().theme_cls.text_color 
+        
+    #col 2: Vert divider
+    MDBoxLayout:
+        size_hint_x: None
+        width: 1
+        md_bg_color: "92769BFF" # Dull purple line
+        
+    #col 3: Opponent's score
+    MDLabel:
+        text: root.opponent_score
+        halign: 'center'
+        valign: 'center'
+        color: app.get_running_app().theme_cls.text_color
+    
+# MDScreenManager = root widget
+MDScreenManager:
+    transition: NoTransition() 
+    
+    MainScreen:
+        name: 'main'
+    GameScreen:
+        name: 'game'
+
+
+## --- MainScreen Layout ---##
+<MainScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        #--- Title "Welcome to Handy"
+        MDLabel:
+            text: "Welcome to Handy"
+            font_style: "H2"
+            halign: "center"
+            size_hint_y: None
+            height: dp(100)
+            md_bg_color: "1C0F1DFF" 
+            color: "E2A9F1FF" # Lilac
+            
+        #--- Main Content Area
+        MDBoxLayout:
+            orientation: 'horizontal'
+            
+            # --- LEFT PANEL: MODE SELECT PANEL (0.25%) ---
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.25
+                md_bg_color: "8E699EFF" # Muted Purple
+                padding: dp(20)
+                spacing: dp(30)
+                
+                MDLabel:
+                    text: "Mode Selection"
+                    font_style: "H4"
+                    halign: "center"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    color: self.theme_cls.text_color
+                    
+                MDRaisedButton:
+                    text: "Mimic"
+                    size_hint_x: 0.8
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.on_mimic_press()
+                    md_bg_color: "E2A9F1FF"
+                    color: "1C0F1DFF" 
+                    
+                MDRaisedButton:
+                    text: "Game"
+                    size_hint_x: 0.8
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.switch_to_game()
+                    md_bg_color: "E0AE6AFF" # Gold
+                    color: "1C0F1DFF"
+                    
+                Widget: 
+                    size_hint_y: 1
+            
+            # --- RIGHT BLOCK: CAMERA FEEDBACK (0.75) ---
+            MDBoxLayout:
+                orientation: 'vertical' 
+                size_hint_x: 0.75
+                md_bg_color: "1C0F1DFF" # Dark Purple/Black
+                padding: dp(20)
+                
+                #camera feedback
+                Image:
+                    id: camera_image_widget
+                    size_hint: 1, 1 
+                    allow_stretch: True
+                    keep_ratio: True
+                    
+
+## --- GAME SCREEN LAYOUT --- ##
+<GameScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        #--- Title ---#
+        MDLabel:
+            text: "Rock, Paper, Scissors"
+            font_style: "H2"
+            halign: "center"
+            size_hint_y: None
+            height: dp(100)
+            md_bg_color: "1C0F1DFF" 
+            color: "E2A9F1FF" 
+        
+        #--- Main Content Area :Left Panel (Score),Right Block (Results) ---#
+        MDBoxLayout:
+            orientation: 'horizontal'
+            
+            # --- LEFT PANEL: Scoreboard (0.25) 
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.25
+                md_bg_color: "8E699EFF" # Muted Purple
+                padding: dp(20)
+                spacing: dp(20)
+                
+                # Current Score Heading
+                MDLabel:
+                    text: "Current Score"
+                    halign: "center"
+                    font_style: "H5"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    color: self.theme_cls.text_color
+                
+                # Score Table Headers (Handy | Opponent)
+                MDGridLayout:
+                    cols: 3
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(5), 0, dp(5), 0
+                    
+                    MDLabel:
+                        text: "Handy"
+                        font_style: "Subtitle1"
+                        halign: 'center'
+                        color: self.theme_cls.text_color
+                        
+                    MDBoxLayout: # Divider
+                        size_hint_x: None
+                        width: 1
+                        md_bg_color: "92769BFF"
+                        
+                    MDLabel:
+                        text: "Opponent"
+                        font_style: "Subtitle1"
+                        halign: 'center'
+                        color: self.theme_cls.text_color
+                
+                #Dynamic score rows
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    id: score_container
+                    size_hint_y: None
+                    height: self.minimum_height
+                    
+                    #update
+                    MDLabel:
+                        text: str(root.scoreboard) 
+                        size_hint_y: None
+                        height: 0
+                        opacity: 0
+                        on_text:
+                            score_container.clear_widgets()
+                            # Loop calls the Factory to create ScoreRow instances
+                            for scores in root.scoreboard: score_container.add_widget(Factory.ScoreRow(handy_score=str(scores[0]), opponent_score=str(scores[1])))
+
+                Widget: # Spacer
+                    size_hint_y: 1
+                    
+                #Dynamic txt: Start / Next / Play Again Button
+                MDRaisedButton:
+                    id: start_reset_button
+                    text: root.start_btn_text
+                    size_hint_x: 0.8
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.start_game()
+                    md_bg_color: "E2A9F1FF"
+                    color: "1C0F1DFF"
+                    
+                #Reset Button
+                MDRaisedButton:
+                    text: "Reset"
+                    size_hint_x: 0.8
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.reset_game()
+                    md_bg_color: "E2A9F1FF"
+                    color: "1C0F1DFF"
+                    
+                #Back to Main Button
+                MDRaisedButton:
+                    text: "Back to Main"
+                    size_hint_x: 0.8
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.manager.current = 'main'
+                    md_bg_color: "E0AE6AFF"
+                    color: "1C0F1DFF"
+            
+            # --- RIGHT BLOCK: Results (0.75) ---
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.75
+                md_bg_color: root.cd_colour 
+                padding: dp(20)
+                
+                # Results Heading
+                MDLabel:
+                    text: "Results"
+                    font_style: "H4"
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(40)
+                    color: self.theme_cls.text_color
+                
+                # Results Panel
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    md_bg_color: "444444FF" # Dark grey 
+                    padding: dp(20)
+                    spacing: dp(20)
+                    
+                    MDLabel:
+                        text: root.cd_text if root.cd_text else root.results_text 
+                        font_style: "H5"
+                        halign: "center"
+                        valign: "center"
+                        color: "E2A9F1AA" # Faint Lilac
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    #hand pix    
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        padding: dp(20)
+                        spacing: dp(20)
+                        
+                        #left pic= handy
+                        Image:
+                            source: root.handy_gesture
+                            size_hint_x: 0.5
+                            allow_stretch: True
+                            keep_ratio: True
+                        
+                        #right pic = opp
+                        Image:
+                            source: root.opponent_gesture
+                            size_hint_x: 0.5
+                            allow_stretch: True
+                            keep_ratio: True
+                            
+                        
