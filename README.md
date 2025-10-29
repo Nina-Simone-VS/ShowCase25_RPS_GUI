@@ -1,6 +1,6 @@
 # 🤖 Robotics Control GUI & HMI Interface
 
-**A Human-Machine Interface (HMI) and Game-Based Control System for an Assistive Robotic Hand.**
+**A Human-Machine Interface (HMI) and Game-Based Control System for a Robotic Hand named Handy.**
 
 ## 🎯 Project Goal
 
@@ -30,8 +30,11 @@ This project was a collaborative effort. **My primary role was the design, devel
 
 | Developer | Primary Role | Key Contributions |
 | :--- | :--- | :--- |
-| **Nina-Simone van Staden** | **Lead HMI/GUI Developer & Project Manager** | UI Design, Command Thread Logic, Game State Management, Project Documentation. |
-| **Buhle Ndzamela** | **Core Control Logic & Gesture Recognition** | Development of the Servo Control, Hand Mimicry, and Gesture Recognition Python modules, Command Thread Logic, Project Documentation. |
+| **Nina-Simone van Staden** | **Lead HMI/GUI Developer & Project Manager** | UI Design, Command Thread Logic, Game State Management, Project Documentation, Assisted Mini Robot Construction |
+| **Buhle Ndzamela** | **Core Control Logic & Gesture Recognition** | Development of the Servo Control, Hand Mimicry, and Gesture Recognition Python modules, Command Thread Logic |
+| **Joshua Naidoo** | **Showcase Design and Aesthetics** | Slideshow presentation, Mini-Robot construction, Showcase table setup & design, Project Documentation|
+| **Bryan Marte** | **Physical Hand Design** | Design actual hand, 3D Print design, Construction|
+| **Bea Botha** | **General Assistance** | Resource procurement, Assisted RPS Code, Present at showcase|
 
 ## 🖼️ Visual Demonstration
 
@@ -41,6 +44,6 @@ This project was a collaborative effort. **My primary role was the design, devel
 
 To run the HMI locally, you will need the following dependencies:
 
-1.  Clone this repository: `git clone [Your Repository URL]`
+1.  Clone this repository: `git clone https://github.com/Nina-Simone-VS/ShowCase25_RPS_GUI/tree/main`
 2.  Install Kivy and KivyMD dependencies: `pip install kivy kivymd`
 3.  Execute the main application file: `python HandyMain.py`
