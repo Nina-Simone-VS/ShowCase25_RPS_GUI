@@ -1,3 +1,10 @@
+""" 
+FILENAME: HandyMain.py
+AUTHOR: Nina-Simone van Staden
+DATE: October 2025
+DESCRIPTION: Contains UI and Command Thread
+"""
+
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.core.window import Window
