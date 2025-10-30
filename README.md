@@ -34,7 +34,7 @@ This project was a collaborative effort. **My primary role was the design, devel
 | **Buhle Ndzamela** | **Core Control Logic & Gesture Recognition** | Development of the Servo Control, Hand Mimicry, and Gesture Recognition Python modules, Command Thread Logic |
 | **Joshua Naidoo** | **Showcase Design and Aesthetics** | Slideshow presentation, Mini-Robot construction, Showcase table setup & design, Project Documentation|
 | **Bryan Marte** | **Physical Hand Design** | Design actual hand, 3D Print design, Construction|
-| **Bea Botha** | **General Assistance** | Resource procurement, Assisted RPS Code, Present at showcase|
+| **Bea Botha** | **General Assistance** | Resource procurement, Rock, Paper, Scissors Code, Present at showcase|
 
 ## 🖼️ Visual Demonstration
 
