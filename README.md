@@ -30,11 +30,11 @@ This project was a collaborative effort. **My primary role was the design, devel
 
 | Developer | Primary Role | Key Contributions |
 | :--- | :--- | :--- |
-| **Nina-Simone van Staden** | **Lead HMI/GUI Developer & Project Manager** | UI Design, Command Thread Logic, Game State Management, Project Documentation, Assisted Mini Robot Construction |
-| **Buhle Ndzamela** | **Core Control Logic & Gesture Recognition** | Development of the Servo Control, Hand Mimicry, and Gesture Recognition Python modules, Command Thread Logic |
-| **Joshua Naidoo** | **Showcase Design and Aesthetics** | Slideshow presentation, Mini-Robot construction, Showcase table setup & design, Project Documentation|
+| **Nina-Simone van Staden** | **HMI/GUI Developer** | UI Design, Command Thread Logic, Game State Management, Project Documentation, Assisted Mini Robot Construction |
+| **Buhle Ndzamela** | **Core Control Logic & Gesture Recognition** | Development of the Servo Control, Hand Mimicry, and Gesture Recognition Python modules, Command Thread Logic, Hand Construction |
+| **Joshua Naidoo** | **Showcase Design and Aesthetics** | Slideshow presentation, Mini-Robot construction, Hand Construction, Showcase table setup & design, Project Documentation|
 | **Bryan Marte** | **Physical Hand Design** | Design actual hand, 3D Print design, Construction|
-| **Bea Botha** | **General Assistance** | Resource procurement, Rock, Paper, Scissors Code, Present at showcase|
+| **Bea Botha** | **Code Developer** | Resource procurement, Rock, Paper, Scissors Code, Present at showcase, Hand Construction|
 
 ## 🖼️ Visual Demonstration
 
